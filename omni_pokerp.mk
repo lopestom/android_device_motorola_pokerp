@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 # Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
 $(call inherit-product, build/target/product/embedded.mk)
