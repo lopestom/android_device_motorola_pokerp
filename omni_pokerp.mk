@@ -22,9 +22,9 @@ $(call inherit-product, build/target/product/embedded.mk)
 PRODUCT_DEVICE := pokerp
 PRODUCT_NAME := omni_pokerp
 PRODUCT_BRAND := motorola
-PRODUCT_MODEL := Moto E6 Plus
+PRODUCT_MODEL := moto e(6) plus
 PRODUCT_MANUFACTURER := motorola
-PRODUCT_RELEASE_NAME := Moto E6 Plus
+PRODUCT_RELEASE_NAME := moto e(6) plus
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE=pokerp \
