@@ -1,30 +1,23 @@
 #
-# Copyright (C) 2020-2021 OrangeFox Recovery Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-ro.product.brand=motorola
-ro.product.name=pokerp
-ro.product.device=pokerp
-ro.build.product=pokerp
+# MOTO Prop
+ro.mot.build.guid=5b9aaa4cec0c46f
+ro.build.version.full=Blur_version.29.401-25-4.pokerp_reteu.reteu.en-US
+ro.mot.build.product.increment=4
+ro.product.display=moto e⁶ plus
+ro.pt.Model_number=moto e(6) plus
+ro.pt.BT_name=moto e(6) plus
+ro.pt.Wifi_hotspot_name=moto e(6) plus
+ro.pt.wifi_direct_name=moto e(6) plus
+ro.pt.mtp_pc_name=moto e(6) plus
+ro.pt.product_name=moto e(6) plus
+ro.pt.mtp_name=moto e(6) plus
+ro.pt.usb.manufacturer=moto e(6) plus
+ro.pt.usb.product=moto e(6) plus
+ro.pt.mtp.print.model=moto e(6) plus
+# end build properties
 ro.treble.enabled=true
 ro.boot.avb_version=1.0
 ro.boot.vbmeta.avb_version=1.0
-ro.sys.usb.storage.type=mtp
-ro.pt.mtp_name=moto e(6) plus
-ro.pt.mtp.print.model=moto e(6) plus
-ro.pt.mtp_pc_name=moto e(6) plus
 #
 ro.hardware.chip=mt6762
 ro.sf.lcd_density=280
@@ -44,5 +37,16 @@ ro.vendor.mtk_f2fs_enable=0
 ro.vendor.mtk_microtrust_tee_support=1
 ro.crypto.volume.filenames_mode=aes-256-cts
 #
+# Recovery specific properties
+ro.secure=0
+ro.adb.secure=0
+ro.debuggable=1
+persist.sys.usb.config=mtp,adb
+persist.service.adb.enable=1
+persist.service.debuggable=1
+persist.sys.isUsbOtgEnabled=true
+ro.sys.usb.mtp.whql.enable=0
+ro.sys.usb.storage.type=mtp
+sys.usb.ffs.aio_compat=true
 vendor.gatekeeper.disable_spu=true
 fbe.metadata.wrappedkey=true
