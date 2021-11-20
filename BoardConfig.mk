@@ -18,10 +18,10 @@ DEVICE_PATH := device/motorola/pokerp
 
 # Architecture
 TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT := cortex-a53
 
 # Binder
 TARGET_USES_64_BIT_BINDER := true
@@ -50,6 +50,8 @@ BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6765
+TARGET_BOOTLOADER_BOARD_NAME := p161m
+TARGET_NO_BOOTLOADER := true
 TARGET_USES_64_BIT_BINDER := true
 
 # Assert
@@ -78,9 +80,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Target copy out
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_RECOVERY_DEVICE_MODULES += libpuresoftkeymasterdevice
-TARGET_RECOVERY_DEVICE_MODULES += libkeymaster3device
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster3device.so 
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
