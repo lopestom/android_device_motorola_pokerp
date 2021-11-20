@@ -13,8 +13,6 @@ service teei_daemon /vendor/bin/teei_daemon \
     -r 5020170115e016302017012521300000 \
     -r 40188311faf343488db888ad39496f9a
 
-# For Microtrust internal development
-service teei_daemon /vendor/bin/teei_daemon
     user root
     group root
     disabled
@@ -143,3 +141,6 @@ on fs
     write /proc/bootprof "start teei_daemon (on fs)"
     start teei_daemon
     write /proc/bootprof "start teei_daemon end (on fs)"
+
+on property:vendor.crypto.fake_encrypt=1 && property:vold.post_fs_data_done=1
+    setprop vendor.soter.teei.crypto.state unencrypted
