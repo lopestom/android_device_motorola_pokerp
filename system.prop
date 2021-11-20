@@ -1,4 +1,3 @@
-#
 # MOTO Prop
 ro.mot.build.guid=5b9aaa4cec0c46f
 ro.build.version.full=Blur_version.29.401-25-4.pokerp_reteu.reteu.en-US
@@ -14,6 +13,9 @@ ro.pt.mtp_name=moto e(6) plus
 ro.pt.usb.manufacturer=moto e(6) plus
 ro.pt.usb.product=moto e(6) plus
 ro.pt.mtp.print.model=moto e(6) plus
+ro.mot.build.customerid=retail
+ro.project=trunk
+ro.target=p161m
 # end build properties
 ro.treble.enabled=true
 ro.boot.avb_version=1.0
