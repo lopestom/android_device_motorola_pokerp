@@ -14,60 +14,83 @@ on init
     mkdir /system_root/system 0700 root root
     symlink /vendor/manifest.xml /system_root/system/manifest.xml
 
-
 on fs
-    install_keyring
+    start hwservicemanager
+    start servicemanager
+
+service capi-2-0 /vendor/bin/hw/vendor.microtrust.hardware.capi@2.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service hidl_memory /system/bin/android.hidl.allocator@1.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
     setprop crypto.ready 1
 
-service keystore_auth /system/bin/keystore_auth
+service hwservicemanager /sbin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+
+service servicemanager /sbin/servicemanager
+    user root
+    group root readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore_auth /sbin/keystore_auth
     oneshot
     user system
     group root
     disabled
     seclabel u:r:recovery:s0
 
-service keystore /system/bin/keystore /tmp/misc/keystore
+service keystore /sbin/keystore /tmp/misc/keystore
     user root
     group root drmrpc readproc
     disabled
     seclabel u:r:recovery:s0
 
-service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     user root
     group root
     disabled
     seclabel u:r:recovery:s0
 
-service vendor.keymaster-3-0 /vendor/bin/hw/android.hardware.keymaster@3.0-service
+service keymaster-3-0 /vendor/bin/hw/android.hardware.keymaster@3.0-service
     user root
     group root drmrpc
     disabled
     seclabel u:r:recovery:s0
 
+service attestation-1-1 /vendor/bin/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-service
+    interface vendor.mediatek.hardware.keymaster_attestation@1.1::IKeymasterDevice default
+    class hal
+    #user root
+    #group root
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=0
+    stop keymaster-3-0
+    stop gatekeeper-1-0
+    stop servicemanager
+    stop attestation-1-1
+
+# start hals as soon as hwservicemanager is ready
 on property:hwservicemanager.ready=true
-    start vendor.keymaster-3-0
+    start keymaster-3-0
     start gatekeeper-1-0
+    start servicemanager
+    start attestation-1-1
 
-on property:ro.crypto.state=unsupported
-    stop teei_daemon
-    stop vendor.keymaster-3-0
-    stop vendor.gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
-
-on property:ro.crypto.state=unencrypted
-    stop teei_daemon
-    stop vendor.keymaster-3-0
-    stop vendor.gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
-
-on property:twrp.decrypt.done=true
-    stop teei_daemon
-    stop vendor.keymaster-3-0
-    stop vendor.gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
 
 on post-fs
     # Support A/B feature for emmc boot region
