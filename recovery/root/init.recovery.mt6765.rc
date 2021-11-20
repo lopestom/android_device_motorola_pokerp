@@ -5,10 +5,15 @@ on init
     mkdir /config
     mount configfs none /config
     # Create a more standard /dev/block layout for our scripts
-    wait /dev/block/platform/bootdevice	
+#    wait /dev/block/platform/bootdevice	
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
     mkdir /mnt/vendor/persist 0700 root root
     mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
+
+    # also symlink manifest to system
+    mkdir /system_root/system 0700 root root
+    symlink /vendor/manifest.xml /system_root/system/manifest.xml
+
 
 on fs
     install_keyring
