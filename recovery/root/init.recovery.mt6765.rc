@@ -17,6 +17,10 @@ on init
 on fs
     start hwservicemanager
     start servicemanager
+    install_keyring
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    setprop crypto.ready 1
+
 
 service capi-2-0 /vendor/bin/hw/vendor.microtrust.hardware.capi@2.0-service
     user root
@@ -29,8 +33,6 @@ service hidl_memory /system/bin/android.hidl.allocator@1.0-service
     group root
     disabled
     seclabel u:r:recovery:s0
-
-    setprop crypto.ready 1
 
 service hwservicemanager /sbin/hwservicemanager
     user root
@@ -78,19 +80,20 @@ service attestation-1-1 /vendor/bin/hw/vendor.mediatek.hardware.keymaster_attest
     disabled
     seclabel u:r:recovery:s0
 
-on property:crypto.ready=0
-    stop keymaster-3-0
-    stop gatekeeper-1-0
-    stop servicemanager
-    stop attestation-1-1
-
-# start hals as soon as hwservicemanager is ready
 on property:hwservicemanager.ready=true
     start keymaster-3-0
-    start gatekeeper-1-0
-    start servicemanager
-    start attestation-1-1
 
+on property:ro.crypto.state=unsupported
+    stop teei_daemon
+    stop keymaster-3-0
+
+on property:ro.crypto.state=unencrypted
+    stop teei_daemon
+    stop keymaster-3-0
+
+on property:twrp.decrypt.done=true
+    stop teei_daemon
+    stop keymaster-3-0
 
 on post-fs
     # Support A/B feature for emmc boot region
