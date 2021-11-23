@@ -13,22 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+
 # Inherit some common Omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/pb/config/common.mk)
 $(call inherit-product, build/target/product/embedded.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := pokerp
 PRODUCT_NAME := omni_pokerp
 PRODUCT_BRAND := motorola
-PRODUCT_MODEL := moto e(6) plus
+PRODUCT_MODEL := Moto E6 Plus
 PRODUCT_MANUFACTURER := motorola
-PRODUCT_RELEASE_NAME := moto e(6) plus
+PRODUCT_RELEASE_NAME := Moto E6 Plus
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_DEVICE=pokerp \
-    PRODUCT_NAME=pokerp_reteu \
-    PRIVATE_BUILD_DESC="full_p161m-user 9 PTAS29.401-25-4 25-4 release-keys"
-
-BUILD_FINGERPRINT := motorola/pokerp_reteu/pokerp:9/PTAS29.401-25-4/25-4:user/release-keys
+# enable stock zip packages flash
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.treble.enabled=true \
+    persist.sys.usb.config=mtp \
+    persist.service.adb.enable=1 \
+    persist.service.debuggable=1 \
+    ro.secure=0 \
+    ro.adb.secure=0 \
+    ro.allow.mock.location=1
