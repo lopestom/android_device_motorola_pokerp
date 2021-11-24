@@ -1,5 +1,5 @@
 # Device path
-COMMON_PATH := device/MTK/common_mt676_
+COMMON_PATH :=device/motorola/pokerp/MTK/common_mt676_
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
