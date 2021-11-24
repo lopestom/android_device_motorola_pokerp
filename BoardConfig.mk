@@ -23,6 +23,9 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 
+# Inherit from MTK COMMON MT676_
+-include device/motorola/pokerp/MTK/common_mt676_/BoardConfig.mk
+
 # Binder
 TARGET_USES_64_BIT_BINDER := true
 
@@ -77,10 +80,6 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Target copy out
 TARGET_COPY_OUT_VENDOR := vendor
-TARGET_RECOVERY_DEVICE_MODULES += libpuresoftkeymasterdevice
-TARGET_RECOVERY_DEVICE_MODULES += libkeymaster3device
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster3device.so 
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
@@ -101,20 +100,11 @@ TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_DEVICE_VERSION := -xxroot 2022
 TW_USE_TOOLBOX := true
 TW_SKIP_COMPATIBILITY_CHECK := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
-
-#crypt
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
 
 # Debugging
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
-
-# Hack: prevent anti rollback
-PLATFORM_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 16.1.0
-VENDOR_SECURITY_PATCH := 2099-12-31

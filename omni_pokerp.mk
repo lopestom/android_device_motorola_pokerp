@@ -13,22 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# Inherit from MTK/common_mt676_
+$(call inherit-product, device/motorola/pokerp/MTK/common_mt676_/common_mt676_.mk)
 
 # Inherit some common Omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/pb/config/common.mk)
 $(call inherit-product, build/target/product/embedded.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := pokerp
 PRODUCT_NAME := omni_pokerp
 PRODUCT_BRAND := motorola
-PRODUCT_MODEL := moto e(6) plus
+PRODUCT_MODEL := Moto E6 Plus
 PRODUCT_MANUFACTURER := motorola
-PRODUCT_RELEASE_NAME := moto e(6) plus
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_DEVICE=pokerp \
-    PRODUCT_NAME=pokerp_reteu \
-    PRIVATE_BUILD_DESC="full_p161m-user 9 PTAS29.401-25-4 25-4 release-keys"
-
-BUILD_FINGERPRINT := motorola/pokerp_reteu/pokerp:9/PTAS29.401-25-4/25-4:user/release-keys
+PRODUCT_RELEASE_NAME := Moto E6 Plus
